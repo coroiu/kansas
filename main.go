@@ -1,8 +1,10 @@
 package main
 
-import "fmt"
-import "flag"
-import "net/http"
+import (
+	"flag"
+	"fmt"
+	"net/http"
+)
 
 func main() {
 	fmt.Println("Welcome to Kansas!")
@@ -12,10 +14,7 @@ func main() {
 
 	fmt.Println("Using '" + *host + "' as hostname")
 
-	http.HandleFunc(*host+"/test", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Println("got /test request")
-		w.Write([]byte("hello world"))
-	})
+	setupControl(*host)
 
 	http.ListenAndServe(":8080", nil)
 }
