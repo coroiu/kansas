@@ -14,8 +14,8 @@ func main() {
 
 	fmt.Println("Using '" + *host + "' as hostname")
 
-	setupControl(*host)
-	setupProxy(*host)
+	SetupControl(*host)
+	SetupProxy(*host)
 
 	http.ListenAndServe(":8080", nil)
 }
