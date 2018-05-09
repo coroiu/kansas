@@ -6,11 +6,11 @@ import (
 	"net/http/httputil"
 )
 
-func SetupProxy(host string) {
-	http.Handle("/", newMultipleHostReverseProxy())
-}
+// func SetupProxy(host string) {
+// 	http.Handle("/", newMultipleHostReverseProxy())
+// }
 
-func newMultipleHostReverseProxy() *httputil.ReverseProxy {
+func NewKansasReverseProxy() *httputil.ReverseProxy {
 	director := func(req *http.Request) {
 		fmt.Print("Proxying: ")
 		fmt.Println(req.URL)
