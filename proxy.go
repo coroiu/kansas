@@ -10,7 +10,7 @@ import (
 // 	http.Handle("/", newMultipleHostReverseProxy())
 // }
 
-func NewKansasReverseProxy() *httputil.ReverseProxy {
+func newKansasReverseProxy() *httputil.ReverseProxy {
 	director := func(req *http.Request) {
 		fmt.Print("Proxying: ")
 		fmt.Println(req.URL)
