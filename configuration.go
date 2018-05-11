@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/tucnak/store"
@@ -34,6 +35,8 @@ func loadConfiguration() {
 	if err := store.Load("config.json", &configuration); err != nil {
 		log.Println("failed to load configuration:", err)
 	}
+
+	fmt.Println(configuration)
 }
 
 func saveConfiguration() {

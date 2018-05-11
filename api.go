@@ -18,6 +18,8 @@ func newAPIServer() *echo.Echo {
 		return false, nil
 	}))
 
+	setupDomainAPIEndpoints(e)
+
 	e.GET("/", func(c echo.Context) error {
 		fmt.Println("got 'control.host/' request")
 		return c.String(http.StatusOK, "Hello, World!")
