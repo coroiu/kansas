@@ -8,7 +8,7 @@ import (
 	"github.com/labstack/echo/middleware"
 )
 
-func newApiServer() *echo.Echo {
+func newAPIServer() *echo.Echo {
 	e := echo.New()
 
 	e.Use(middleware.BasicAuth(func(username, password string, c echo.Context) (bool, error) {

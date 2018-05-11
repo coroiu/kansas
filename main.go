@@ -9,6 +9,8 @@ import (
 func main() {
 	fmt.Println("Welcome to Kansas!")
 
+	initStore()
+
 	host := *flag.String("host", "localhost", "hostname to use for proxying")
 	controlEndpoint := "control." + host + "/"
 	apiEndpoint := "api." + controlEndpoint
@@ -17,7 +19,7 @@ func main() {
 	fmt.Println("Using '" + host + "' as hostname")
 
 	loadConfiguration()
-	http.Handle(apiEndpoint, newApiServer())
+	http.Handle(apiEndpoint, newAPIServer())
 	http.Handle("/", newKansasReverseProxy())
 	http.ListenAndServe(":8080", nil)
 }

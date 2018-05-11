@@ -7,31 +7,36 @@ import (
 )
 
 type KansasConfiguration struct {
-	users   []UserConfiguration
-	domains []DomainConfiguration
+	Users                 []UserConfiguration   `json:"users"`
+	Domains               []DomainConfiguration `json:"domains"`
+	DynamicPortForwarding bool                  `json:"dynamicPortForwarding"`
 }
 
 type UserConfiguration struct {
-	username string
-	password string
+	Username string `json:"username"`
+	Password string `json:"password"`
 }
 
 type DomainConfiguration struct {
-	domain string
-	target string
+	Domain                 string `json:"domain"`
+	Target                 string `json:"target"`
+	RequiresAuthentication bool   `json:"requiresAuthentication"`
 }
 
 var configuration KansasConfiguration
 
-func loadConfiguration() {
+func initStore() {
 	store.Init("coroiu/kansas")
-	if err := store.Load("config.yaml", &configuration); err != nil {
+}
+
+func loadConfiguration() {
+	if err := store.Load("config.json", &configuration); err != nil {
 		log.Println("failed to load configuration:", err)
 	}
 }
 
 func saveConfiguration() {
-	if err := store.Save("config.yaml", &configuration); err != nil {
+	if err := store.Save("config.json", &configuration); err != nil {
 		log.Println("failed to save configuration:", err)
 	}
 }
