@@ -20,6 +20,7 @@ type UserConfiguration struct {
 type DomainConfiguration struct {
 	Domain                 string `json:"domain"`
 	Target                 string `json:"target"`
+	Port                   int    `json:"port"`
 	RequiresAuthentication bool   `json:"requiresAuthentication"`
 }
 
