@@ -14,11 +14,13 @@ type KansasConfiguration struct {
 }
 
 type UserConfiguration struct {
+	Id       string `json:"id"`
 	Username string `json:"username"`
 	Password string `json:"password"`
 }
 
 type DomainConfiguration struct {
+	Id                     string `json:"id"`
 	Domain                 string `json:"domain"`
 	Target                 string `json:"target"`
 	Port                   int    `json:"port"`
