@@ -8,9 +8,9 @@ import (
 )
 
 type KansasConfiguration struct {
-	Users                 []UserConfiguration   `json:"users"`
-	Domains               []DomainConfiguration `json:"domains"`
-	DynamicPortForwarding bool                  `json:"dynamicPortForwarding"`
+	Users                 []UserConfiguration  `json:"users"`
+	Domains               DomainConfigurations `json:"domains"`
+	DynamicPortForwarding bool                 `json:"dynamicPortForwarding"`
 }
 
 type UserConfiguration struct {
@@ -19,6 +19,7 @@ type UserConfiguration struct {
 	Password string `json:"password"`
 }
 
+type DomainConfigurations []DomainConfiguration
 type DomainConfiguration struct {
 	Id                     string `json:"id"`
 	Domain                 string `json:"domain"`
@@ -45,4 +46,13 @@ func saveConfiguration() {
 	if err := store.Save("config.json", &configuration); err != nil {
 		log.Println("failed to save configuration:", err)
 	}
+}
+
+func (domains DomainConfigurations) findIndex(id string) int {
+	for i, domain := range domains {
+		if domain.Id == id {
+			return i
+		}
+	}
+	return -1
 }

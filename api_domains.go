@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/google/uuid"
 	"github.com/labstack/echo"
 )
@@ -25,11 +27,17 @@ func createDomain(c echo.Context) error {
 // }
 
 func updateDomain(c echo.Context) error {
+	fmt.Println(c.Param("id"))
 	return c.NoContent(204)
 }
 
 func deleteDomain(c echo.Context) error {
-	return c.NoContent(204)
+	i := configuration.Domains.findIndex(c.Param("id"))
+	if i >= 0 {
+		configuration.Domains = append(configuration.Domains[:i], configuration.Domains[i+1:]...)
+		return c.NoContent(204)
+	}
+	return c.NoContent(404)
 }
 
 func setupDomainAPIEndpoints(e *echo.Echo) {
