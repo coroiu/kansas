@@ -11,11 +11,16 @@ import (
 func newAPIServer() *echo.Echo {
 	e := echo.New()
 
-	e.Use(middleware.BasicAuth(func(username, password string, c echo.Context) (bool, error) {
-		if username == "admin" && password == "password" {
-			return true, nil
-		}
-		return false, nil
+	// e.Use(middleware.BasicAuth(func(username, password string, c echo.Context) (bool, error) {
+	// 	if username == "admin" && password == "password" {
+	// 		return true, nil
+	// 	}
+	// 	return false, nil
+	// }))
+
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"*"},
+		AllowMethods: []string{echo.GET, echo.PUT, echo.POST, echo.DELETE},
 	}))
 
 	setupDomainAPIEndpoints(e)
